@@ -1,0 +1,21 @@
+{
+	"name": "img-seek",
+	"version": "1.0.0",
+	"description": "Image Search Abstraction Layer, a freeCodeCamp project",
+	"author": "Ivan Lim <aimprove@gmail.com>",
+	"dependencies": {
+		"dotenv": "^5.0.1",
+		"express": "^4.16.0"
+	},
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"engines": {
+		"node": "8.9.4"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ijklim/img-seek.git"
+	}
+}
