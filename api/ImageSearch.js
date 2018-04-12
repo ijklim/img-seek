@@ -1,14 +1,38 @@
+const axios = require("axios");
+
 module.exports = function (req) {
-  let urlMappings = [];
+  this.search = async ({
+    apiKey,
+    offset = 0,
+    searchTerm,
+  }) => {
+    // Ref: https://pixabay.com/api/docs/
+    let url = '' +
+      'https://pixabay.com/api?' +
+      `key=${apiKey}&` +
+      `q=${searchTerm}&` +
+      (offset > 0 ? `page=${+offset + 1}&` : '') +
+      `per_page=10&` +
+      '';
 
-  this.search = (searchTerm, offset = 0) => {
-    // if (urlToShorten.length === 0) return { error: 'Url missing' }
-    // if (!urlToShorten.match(/^http[s]?\:\/\//)) return { error: 'Invalid url' }
+    return await axios
+      .get(url)
+      .then(json => {
+        if (json.data.totalHits === 0) {
+          return {
+            message: `No image found under ${searchTerm}`,
+          }
+        }
 
-    // urlMappings.push(urlToShorten);
-
-    return {
-      search_term: searchTerm,
-    }
+        return json.data.hits.map(hit => ({
+          url: hit.largeImageURL,
+          snippet: hit.tags,
+          thumbnail: hit.previewURL,
+          context: hit.pageURL,
+        }));
+      })
+      .catch(error => ({
+        error: error
+      }));
   }
 }

@@ -26,7 +26,7 @@ if (!process.env.DISABLE_XORIGIN) {
 
 
 /**
- * URL Shortener feature, v1.0.0
+ * Image Search feature, v1.0.0
  */
 let imageSearch;
 app.use(function(req, res, next) {
@@ -39,17 +39,17 @@ app.use(function(req, res, next) {
 
 // Note: * allows / in param
 app.get('/api/imagesearch/*', function(req, res) {
-  console.log('remove', process.env.GOOGLE_CUSTOM_SEARCH_API_KEY)
-  res.json(imageSearch.search(req.params[0], req.query.offset));
+  imageSearch.search({
+    apiKey: process.env.PIXABAY_API_KEY,
+    offset: req.query.offset,
+    searchTerm: req.params[0],
+  })
+  .then(json => res.json(json))
+  .catch(error => {
+    console.log('Error encountered accessing /api/imagesearch/: ', error);
+  });
 });
 
-app.get('/:id', function(req, res) {
-  let result = urlShortener.getOriginalUrl(req.params.id);
-
-  if (result.error) return res.json(result);
-
-  return res.redirect(result.original_url);
-});
 
 
 
