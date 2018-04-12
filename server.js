@@ -50,7 +50,10 @@ app.get('/api/imagesearch/*', function(req, res) {
   });
 });
 
-
+// Search history
+app.get('/api/latest/imagesearch/', function(req, res) {
+  res.json(imageSearch.history());
+});
 
 
 app.use('/public', express.static(process.cwd() + '/public'));

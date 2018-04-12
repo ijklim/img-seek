@@ -1,6 +1,12 @@
 const axios = require("axios");
 
 module.exports = function (req) {
+  let history = [];
+
+  this.history = () => {
+    return history;
+  }
+
   this.search = async ({
     apiKey,
     offset = 0,
@@ -23,6 +29,12 @@ module.exports = function (req) {
             message: `No image found under ${searchTerm}`,
           }
         }
+
+        // Record history
+        history.push({
+          terms: searchTerm,
+          when: new Date,
+        });
 
         return json.data.hits.map(hit => ({
           url: hit.largeImageURL,
