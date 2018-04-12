@@ -1,9 +1,10 @@
 {
 	"name": "img-seek",
 	"version": "1.0.0",
-	"description": "Image Search Abstraction Layer, a freeCodeCamp project",
+	"description": "Pixabay Image Search Abstraction Layer, a freeCodeCamp project",
 	"author": "Ivan Lim <aimprove@gmail.com>",
 	"dependencies": {
+		"axios": "^0.18.0",
 		"dotenv": "^5.0.1",
 		"express": "^4.16.0"
 	},
