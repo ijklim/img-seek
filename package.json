@@ -4,7 +4,7 @@
 	"description": "Pixabay Image Search Abstraction Layer, a freeCodeCamp project",
 	"author": "Ivan Lim <aimprove@gmail.com>",
 	"dependencies": {
-		"axios": "^0.18.0",
+		"axios": "^0.21.1",
 		"dotenv": "^5.0.1",
 		"express": "^4.16.0"
 	},
